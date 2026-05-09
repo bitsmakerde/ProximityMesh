@@ -11,6 +11,12 @@ public struct ProximityOcclusionVolume: Sendable {
         self.max = max + expansion
     }
 
+    public init(center: SIMD3<Float>, halfExtent: Float) {
+        let expansion = SIMD3<Float>(repeating: Swift.max(0, halfExtent))
+        self.min = center - expansion
+        self.max = center + expansion
+    }
+
     public func contains(_ point: SIMD3<Float>) -> Bool {
         point.x >= min.x && point.x <= max.x &&
         point.y >= min.y && point.y <= max.y &&
